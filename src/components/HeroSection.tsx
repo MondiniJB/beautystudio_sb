@@ -1,27 +1,49 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
+import videoHero from '../assets/videohero.mp4';
 
 export function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Background with overlay */}
+      {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/80 via-dark-bg/90 to-dark-bg z-10" />
-        {/* Placeholder for an actual background image later. We use a subtle gold radial gradient for now */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15)_0%,transparent_50%)]" />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover"
+        >
+          <source src={videoHero} type="video/mp4" />
+        </video>
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
         <Reveal delay={0}>
-          <div className="inline-block mb-4 px-4 py-1 rounded-full border border-primary-gold/30 bg-primary-gold/10 text-primary-gold text-sm font-medium tracking-wide">
-            Campeona Championship Brows
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <div className="px-4 py-1.5 rounded-full border border-primary-gold/30 bg-primary-gold/10 text-primary-gold text-sm font-medium tracking-wide flex items-center">
+              Campeona Championship Brows
+            </div>
+            <a 
+              href="https://maps.app.goo.gl/VWrd2KmhGiPybt4D8" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-2 cursor-pointer"
+            >
+              <div className="flex text-primary-gold text-xs">
+                ★★★★★
+              </div>
+              <span className="text-white text-sm font-medium">5.0 en Google</span>
+            </a>
           </div>
         </Reveal>
         
         <Reveal delay={100}>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            Realza tu belleza <br />
+            Resaltá tu belleza <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-gold via-[#f3e5ab] to-primary-gold">
               natural
             </span>
