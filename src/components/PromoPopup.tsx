@@ -5,10 +5,10 @@ export function PromoPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Retrasar la aparición del popup para que la animación de entrada inicial termine
+    // Retrasar la aparición del popup (reducido a 500ms para asegurar que lo vean rápido)
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 2500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
