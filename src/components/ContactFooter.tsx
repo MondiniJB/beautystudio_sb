@@ -64,7 +64,7 @@ export function ContactFooter() {
               </div>
 
               <a 
-                href="https://wa.me/541136143690" 
+                href="https://api.whatsapp.com/send/?phone=541136143690&text=Hola.%20Quer%C3%ADa%20consultar%20por%20un%20turno...&type=phone_number&app_absent=0" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors"
