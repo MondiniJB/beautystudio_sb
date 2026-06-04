@@ -1,57 +1,70 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
-// import videoHero from '../assets/videohero.mp4';
-import videoWebpFallback from '../assets/videohero.webp';
-// import { useEffect, useRef, useState } from 'react';
+import videoHero from '../assets/videohero.mp4';
+import { useEffect, useRef } from 'react';
 
 export function HeroSection() {
-  // --- CÓDIGO MP4 GUARDADO POR SI ACASO ---
-  /*
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          setIsPlaying(true);
-        }).catch((error) => {
-          // Autoplay prevented (e.g. iOS low power mode)
-          console.log('Autoplay prevented, using WebP fallback:', error);
-          setIsPlaying(false);
-        });
+    let played = false;
+    
+    const tryPlayVideo = () => {
+      if (played) return;
+      if (videoRef.current && videoRef.current.paused) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            played = true;
+            removeListeners();
+          }).catch((error) => {
+            // Autoplay prevented, wait for next interaction
+            console.log('Esperando interacción del usuario para reproducir:', error);
+          });
+        }
       }
-    }
+    };
+
+    const handleInteraction = () => {
+      tryPlayVideo();
+    };
+
+    const addListeners = () => {
+      // Usamos touchend porque iOS Safari no toma touchmove/scroll como gesto de usuario, pero sí touchend (al terminar el swipe).
+      document.addEventListener('touchend', handleInteraction, { passive: true });
+      document.addEventListener('click', handleInteraction, { passive: true });
+      document.addEventListener('scroll', handleInteraction, { passive: true });
+    };
+
+    const removeListeners = () => {
+      document.removeEventListener('touchend', handleInteraction);
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('scroll', handleInteraction);
+    };
+
+    addListeners();
+    // Try to play immediately (works if not in low power mode)
+    tryPlayVideo();
+
+    return () => {
+      removeListeners();
+    };
   }, []);
-  */
-  // ----------------------------------------
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0 bg-dark-bg">
-        {/* Usamos ÚNICAMENTE el WebP Animado como pidió el usuario */}
-        <img 
-          src={videoWebpFallback} 
-          alt="Fondo de Beauty Studio"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        
-        {/* --- CÓDIGO MP4 GUARDADO POR SI ACASO ---
         <video 
           ref={videoRef}
           autoPlay 
           loop 
           muted 
           playsInline 
-          onPlaying={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={videoHero} type="video/mp4" />
         </video>
-        ---------------------------------------- */}
         
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
