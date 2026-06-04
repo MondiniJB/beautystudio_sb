@@ -40,7 +40,7 @@ export function ContactFooter() {
 
           <div className="lg:col-span-4 lg:px-4">
             <h4 className="text-white font-semibold text-lg mb-6">Horarios</h4>
-            <ul className="text-gray-400 text-sm flex flex-col gap-2 max-w-[300px]">
+            <ul className="text-gray-400 text-sm flex flex-col gap-2 max-w-[220px]">
               <li className="flex justify-between"><span>Lunes</span> <span>09:00 - 20:00</span></li>
               <li className="flex justify-between"><span>Martes</span> <span>08:00 - 18:00</span></li>
               <li className="flex justify-between"><span>Miércoles</span> <span>08:00 - 20:00</span></li>
