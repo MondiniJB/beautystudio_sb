@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
-import videoHero from '../assets/videohero.mp4';
+// import videoHero from '../assets/videohero.mp4';
 import videoWebpFallback from '../assets/videohero.webp';
-import { useEffect, useRef, useState } from 'react';
+// import { useEffect, useRef, useState } from 'react';
 
 export function HeroSection() {
   // --- CÓDIGO MP4 GUARDADO POR SI ACASO ---
