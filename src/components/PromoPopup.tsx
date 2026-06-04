@@ -37,44 +37,44 @@ export function PromoPopup() {
       />
       
       {/* Contenido del Modal */}
-      <div className="relative glass-panel bg-dark-bg/90 w-full max-w-md p-8 text-center animate-in fade-in zoom-in duration-300">
+      <div className="relative glass-panel bg-dark-bg/90 w-[90%] max-w-[20rem] sm:max-w-md p-6 sm:p-8 text-center animate-in fade-in zoom-in duration-300">
         <button 
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors"
           aria-label="Cerrar"
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        <div className="w-16 h-16 bg-primary-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Gift className="w-8 h-8 text-primary-gold" />
+        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+          <Gift className="w-6 h-6 sm:w-8 sm:h-8 text-primary-gold" />
         </div>
 
-        <h3 className="text-2xl font-bold text-white mb-2">
+        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1.5 sm:mb-2">
           ¡Tenemos un regalo para vos!
         </h3>
         
-        <p className="text-gray-300 mb-6 text-lg">
-          Usá el código <span className="font-bold text-primary-gold px-2 py-1 bg-primary-gold/10 rounded-md">BEAUTYWEB</span> y obtené un <span className="font-bold text-white">5% OFF</span> en tu primera sesión.
+        <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-lg">
+          Usá el código <span className="font-bold text-primary-gold px-1.5 py-0.5 sm:px-2 sm:py-1 bg-primary-gold/10 rounded-md">BEAUTYWEB</span> y obtené un <span className="font-bold text-white">5% OFF</span> en tu primera sesión.
         </p>
 
-        <p className="text-sm text-gray-400 mb-8">
+        <p className="text-xs sm:text-sm text-gray-400 mb-5 sm:mb-8">
           * Válido ingresando el código en Agenda Pro al confirmar tu turno.
         </p>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5 sm:gap-3">
           <a
             href="https://beautystudiosb.site.agendapro.com/ar/sucursal/169540"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleBook}
-            className="btn-gold w-full flex items-center justify-center gap-2 text-lg"
+            className="btn-gold !py-2.5 sm:!py-3 w-full flex items-center justify-center gap-2 text-base sm:text-lg"
           >
             Copiar código y agendar
           </a>
           <button
             onClick={handleClose}
-            className="px-6 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/10 transition-colors"
+            className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/10 transition-colors text-sm sm:text-base"
           >
             Seguir explorando
           </button>

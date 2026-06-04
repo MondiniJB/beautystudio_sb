@@ -7,7 +7,6 @@ import { ContactFooter } from './components/ContactFooter';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { FAQSection } from './components/FAQSection';
 import { FloatingBookingButton } from './components/FloatingBookingButton';
-import { PromoPopup } from './components/PromoPopup';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
@@ -69,7 +68,6 @@ function App() {
       </main>
       <ContactFooter />
       <FloatingBookingButton />
-      <PromoPopup />
     </div>
   );
 }
