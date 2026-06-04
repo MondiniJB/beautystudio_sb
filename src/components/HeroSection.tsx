@@ -6,55 +6,14 @@ import { useEffect, useRef } from 'react';
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    let played = false;
-
-    const attemptPlay = () => {
-      if (played) return;
-      if (videoRef.current && videoRef.current.paused) {
-        const playPromise = videoRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            played = true;
-            removeListeners();
-          }).catch((error) => {
-            console.log('Autoplay blocked, waiting for interaction:', error);
-          });
-        }
-      }
-    };
-
-    const handleGlobalInteraction = () => {
-      attemptPlay();
-    };
-
-    const addListeners = () => {
-      window.addEventListener('touchend', handleGlobalInteraction, { capture: true });
-      window.addEventListener('click', handleGlobalInteraction, { capture: true });
-      window.addEventListener('touchstart', handleGlobalInteraction, { capture: true, passive: true });
-      window.addEventListener('scroll', handleGlobalInteraction, { capture: true, passive: true });
-    };
-
-    const removeListeners = () => {
-      window.removeEventListener('touchend', handleGlobalInteraction, { capture: true });
-      window.removeEventListener('click', handleGlobalInteraction, { capture: true });
-      window.removeEventListener('touchstart', handleGlobalInteraction, { capture: true });
-      window.removeEventListener('scroll', handleGlobalInteraction, { capture: true });
-    };
-
-    addListeners();
-    attemptPlay();
-
-    return () => {
-      removeListeners();
-    };
-  }, []);
+  // El video tiene autoplay nativo. Si iOS lo bloquea por batería,
+  // mostrará su botón de play nativo. Como los textos ahora son "transparentes"
+  // a los toques (pointer-events-none), el usuario podrá tocar ese botón nativo.
 
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden cursor-pointer md:cursor-default"
-      onClick={() => {}}
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0 bg-dark-bg">
@@ -69,13 +28,14 @@ export function HeroSection() {
           <source src={videoHero} type="video/mp4" />
         </video>
         
-        {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
+        {/* Overlay to ensure text readability - pointer-events-none para no bloquear el video */}
+        <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10 pointer-events-none" />
       </div>
 
       {/* Removed buggy invisible layer that was blocking interactions */}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      {/* Contenedor con pointer-events-none para dejar pasar clicks al video */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center pointer-events-none">
         
         <Reveal delay={0}>
           <div className="flex flex-wrap justify-center gap-3 mb-6">
@@ -86,7 +46,7 @@ export function HeroSection() {
               href="https://maps.app.goo.gl/VWrd2KmhGiPybt4D8" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-2 cursor-pointer"
+              className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-2 cursor-pointer pointer-events-auto"
             >
               <div className="flex text-primary-gold text-xs">
                 ★★★★★
@@ -112,7 +72,7 @@ export function HeroSection() {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 pointer-events-auto">
             <a
               href="https://beautystudiosb.site.agendapro.com/ar/sucursal/169540"
               target="_blank"
@@ -120,13 +80,13 @@ export function HeroSection() {
               className="btn-gold flex items-center justify-center gap-2 text-lg"
             >
               Reservá tu turno
-              <ArrowRight size={20} />
+              <ArrowRight className="w-5 h-5" />
             </a>
             <a
-              href="#services"
-              className="px-8 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors flex items-center justify-center"
+              href="#servicios"
+              className="px-8 py-3.5 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-lg font-medium"
             >
-              Nuestros Servicios
+              Nuestros servicios
             </a>
           </div>
         </Reveal>
