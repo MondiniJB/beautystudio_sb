@@ -7,14 +7,14 @@ export function ContactFooter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 mb-12">
           
-          <div className="lg:col-span-3 flex flex-col items-start">
+          <div className="lg:col-span-2 flex flex-col items-start">
             <img src={logo} alt="Beauty Studio SB" className="h-16 w-auto object-contain mb-4" />
             <p className="text-gray-400 text-sm max-w-xs">
               Resalta tu belleza natural con la mejor tecnología y profesionalismo.
             </p>
           </div>
           
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <h4 className="text-white font-semibold text-lg mb-6">Ubicación</h4>
             <div className="flex items-start gap-3 text-gray-400 mb-6 text-sm">
               <MapPin className="text-primary-gold shrink-0 mt-1" size={20} />
@@ -24,7 +24,7 @@ export function ContactFooter() {
                 Argentina
               </p>
             </div>
-            <div className="w-full h-40 rounded-xl overflow-hidden border border-white/10 relative group bg-white/5">
+            <div className="w-full max-w-[280px] h-40 rounded-xl overflow-hidden border border-white/10 relative group bg-white/5">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.6020524458315!2d-58.50612!3d-34.8463386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd72e12330a13%3A0x6b47c61fcf1150bd!2sSB%20Beauty%20Studio!5e0!3m2!1ses-419!2sar!4v1714502553093!5m2!1ses-419!2sar" 
                 width="100%" 
@@ -38,9 +38,9 @@ export function ContactFooter() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-4 lg:px-4">
             <h4 className="text-white font-semibold text-lg mb-6">Horarios</h4>
-            <ul className="text-gray-400 text-sm flex flex-col gap-2">
+            <ul className="text-gray-400 text-sm flex flex-col gap-2 max-w-[300px]">
               <li className="flex justify-between"><span>Lunes</span> <span>09:00 - 20:00</span></li>
               <li className="flex justify-between"><span>Martes</span> <span>08:00 - 18:00</span></li>
               <li className="flex justify-between"><span>Miércoles</span> <span>08:00 - 20:00</span></li>
@@ -51,7 +51,7 @@ export function ContactFooter() {
             </ul>
           </div>
           
-          <div className="lg:col-span-3 lg:pl-6">
+          <div className="lg:col-span-3">
             <h4 className="text-white font-semibold text-lg mb-6">Contacto & Redes</h4>
             
             <div className="flex flex-col gap-4 text-sm mb-6">
