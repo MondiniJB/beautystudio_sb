@@ -1,40 +1,14 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
-import { useEffect, useRef } from 'react';
 
 export function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const tryPlayVideo = () => {
-      if (videoRef.current && videoRef.current.paused) {
-        videoRef.current.play().catch((error) => {
-          console.log('Autoplay prevented by browser:', error);
-        });
-      }
-    };
-
-    // Listeners for user interaction to resume video if paused by low power mode
-    const handleInteraction = () => {
-      tryPlayVideo();
-    };
-
-    document.addEventListener('touchstart', handleInteraction, { passive: true });
-    document.addEventListener('click', handleInteraction, { passive: true });
-
-    return () => {
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('click', handleInteraction);
-    };
-  }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0">
         <video 
-          ref={videoRef}
           autoPlay 
           loop 
           muted 

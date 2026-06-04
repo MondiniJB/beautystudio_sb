@@ -23,3 +23,12 @@ html {
 .btn-gold {
   @apply bg-primary-gold text-black font-bold py-3 px-8 rounded-full transition-all duration-300 hover:bg-[#ebd27c] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0;
 }
+
+/* Hide iOS Safari play button on low power mode */
+video::-webkit-media-controls {
+  display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
