@@ -8,22 +8,53 @@ export function HeroSection() {
   const [needsInteraction, setNeedsInteraction] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          setNeedsInteraction(false);
-        }).catch((error) => {
-          // Autoplay blocked (Low Power Mode)
-          console.log('Autoplay blocked, showing invisible interaction layer:', error);
-          setNeedsInteraction(true);
-        });
+    let played = false;
+
+    const attemptPlay = () => {
+      if (played) return;
+      if (videoRef.current && videoRef.current.paused) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            played = true;
+            setNeedsInteraction(false);
+            removeListeners();
+          }).catch((error) => {
+            console.log('Autoplay blocked, waiting for interaction:', error);
+            setNeedsInteraction(true);
+          });
+        }
       }
-    }
+    };
+
+    const handleGlobalInteraction = () => {
+      attemptPlay();
+    };
+
+    const addListeners = () => {
+      document.addEventListener('touchend', handleGlobalInteraction, { passive: true });
+      document.addEventListener('click', handleGlobalInteraction, { passive: true });
+      document.addEventListener('scroll', handleGlobalInteraction, { passive: true });
+      document.addEventListener('touchstart', handleGlobalInteraction, { passive: true });
+    };
+
+    const removeListeners = () => {
+      document.removeEventListener('touchend', handleGlobalInteraction);
+      document.removeEventListener('click', handleGlobalInteraction);
+      document.removeEventListener('scroll', handleGlobalInteraction);
+      document.removeEventListener('touchstart', handleGlobalInteraction);
+    };
+
+    addListeners();
+    attemptPlay();
+
+    return () => {
+      removeListeners();
+    };
   }, []);
 
   const handleInteraction = () => {
-    if (videoRef.current) {
+    if (videoRef.current && videoRef.current.paused) {
       videoRef.current.play().then(() => {
         setNeedsInteraction(false);
       }).catch(err => {
@@ -51,17 +82,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
       </div>
 
-      {/* Invisible layer to capture first interaction on mobile */}
-      {needsInteraction && (
-        <div 
-          className="absolute inset-0 z-[100] md:hidden cursor-pointer"
-          onClick={handleInteraction}
-          onTouchStart={handleInteraction}
-          onTouchEnd={handleInteraction}
-          onTouchMove={handleInteraction}
-          aria-hidden="true"
-        />
-      )}
+      {/* Removed buggy invisible layer that was blocking interactions */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
@@ -85,7 +106,11 @@ export function HeroSection() {
         </Reveal>
         
         <Reveal delay={100}>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+          <h1 
+            className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight ${needsInteraction ? 'cursor-pointer' : ''}`}
+            onClick={handleInteraction}
+            onTouchEnd={handleInteraction}
+          >
             Resaltá tu belleza <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-gold via-[#f3e5ab] to-primary-gold">
               natural
@@ -94,7 +119,11 @@ export function HeroSection() {
         </Reveal>
         
         <Reveal delay={200}>
-          <p className="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10">
+          <p 
+            className={`mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10 ${needsInteraction ? 'cursor-pointer' : ''}`}
+            onClick={handleInteraction}
+            onTouchEnd={handleInteraction}
+          >
             SB Solange Bianconi | Especialista en Cejas & PMU
           </p>
         </Reveal>
