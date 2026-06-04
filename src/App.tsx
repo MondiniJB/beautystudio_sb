@@ -8,11 +8,38 @@ import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { FAQSection } from './components/FAQSection';
 import { FloatingBookingButton } from './components/FloatingBookingButton';
 import { PromoPopup } from './components/PromoPopup';
+import { useEffect } from 'react';
+import Lenis from 'lenis';
 
 import cejas1 from './assets/cejas1.jpg';
 import cejas2 from './assets/cejas2.jpg';
 
 function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-primary-gold selection:text-black">
       <Navbar />
