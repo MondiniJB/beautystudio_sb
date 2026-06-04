@@ -1,68 +1,49 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
-import { useEffect, useRef } from 'react';
+import videoWebpFallback from '../assets/videohero.webp';
+import { useEffect, useRef, useState } from 'react';
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    let played = false;
-    
-    const tryPlayVideo = () => {
-      if (played) return;
-      if (videoRef.current && videoRef.current.paused) {
-        const playPromise = videoRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            played = true;
-            removeListeners();
-          }).catch((error) => {
-            // Autoplay prevented, wait for next interaction
-            console.log('Esperando interacción del usuario para reproducir:', error);
-          });
-        }
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          setIsPlaying(true);
+        }).catch((error) => {
+          // Autoplay prevented (e.g. iOS low power mode)
+          console.log('Autoplay prevented, using WebP fallback:', error);
+          setIsPlaying(false);
+        });
       }
-    };
-
-    const handleInteraction = () => {
-      tryPlayVideo();
-    };
-
-    const addListeners = () => {
-      document.addEventListener('touchstart', handleInteraction, { passive: true });
-      document.addEventListener('touchmove', handleInteraction, { passive: true });
-      document.addEventListener('scroll', handleInteraction, { passive: true });
-      document.addEventListener('click', handleInteraction, { passive: true });
-    };
-
-    const removeListeners = () => {
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('touchmove', handleInteraction);
-      document.removeEventListener('scroll', handleInteraction);
-      document.removeEventListener('click', handleInteraction);
-    };
-
-    addListeners();
-    // Try to play immediately (works if not in low power mode)
-    tryPlayVideo();
-
-    return () => {
-      removeListeners();
-    };
+    }
   }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-dark-bg">
+        {/* WebP Fallback (visible if video is blocked) */}
+        <img 
+          src={videoWebpFallback} 
+          alt="Fondo de Beauty Studio"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
+        />
+        
+        {/* High Quality Video (visible if playing successfully) */}
         <video 
           ref={videoRef}
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover"
+          onPlaying={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
         >
           <source src={videoHero} type="video/mp4" />
         </video>
