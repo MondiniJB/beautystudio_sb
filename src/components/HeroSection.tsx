@@ -1,11 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [needsInteraction, setNeedsInteraction] = useState(false);
 
   useEffect(() => {
     let played = false;
@@ -17,11 +16,9 @@ export function HeroSection() {
         if (playPromise !== undefined) {
           playPromise.then(() => {
             played = true;
-            setNeedsInteraction(false);
             removeListeners();
           }).catch((error) => {
             console.log('Autoplay blocked, waiting for interaction:', error);
-            setNeedsInteraction(true);
           });
         }
       }
@@ -52,16 +49,6 @@ export function HeroSection() {
       removeListeners();
     };
   }, []);
-
-  const handleInteraction = () => {
-    if (videoRef.current && videoRef.current.paused) {
-      videoRef.current.play().then(() => {
-        setNeedsInteraction(false);
-      }).catch(err => {
-        console.log('Aún bloqueado:', err);
-      });
-    }
-  };
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
