@@ -7,6 +7,7 @@ import { ContactFooter } from './components/ContactFooter';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { FAQSection } from './components/FAQSection';
 import { FloatingBookingButton } from './components/FloatingBookingButton';
+import { PromoPopup } from './components/PromoPopup';
 
 import cejas1 from './assets/cejas1.jpg';
 import cejas2 from './assets/cejas2.jpg';
@@ -43,6 +44,7 @@ function App() {
       </main>
       <ContactFooter />
       <FloatingBookingButton />
+      <PromoPopup />
     </div>
   );
 }
