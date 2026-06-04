@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
