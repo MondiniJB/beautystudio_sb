@@ -40,7 +40,7 @@ export function ContactFooter() {
                 allowFullScreen 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                className="filter grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 pointer-events-none"
+                className="filter grayscale-0 opacity-100 md:grayscale md:opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 pointer-events-none"
               ></iframe>
             </a>
           </div>
@@ -76,7 +76,7 @@ export function ContactFooter() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle shrink-0"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle shrink-0 text-green-400 md:text-current"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
                 <span>¡Contáctanos por Whatsapp!</span>
               </a>
 
@@ -86,7 +86,7 @@ export function ContactFooter() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-400 hover:text-primary-gold transition-colors w-fit"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram shrink-0"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram shrink-0 text-[#E1306C] md:text-current"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 <span>@beautystudio_sb</span>
               </a>
             </div>
