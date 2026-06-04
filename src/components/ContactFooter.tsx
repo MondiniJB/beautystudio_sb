@@ -14,7 +14,7 @@ export function ContactFooter() {
             </p>
           </div>
           
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <h4 className="text-white font-semibold text-lg mb-6">Ubicación</h4>
             <div className="flex items-start gap-3 text-gray-400 mb-6 text-sm">
               <MapPin className="text-primary-gold shrink-0 mt-1" size={20} />
@@ -38,7 +38,7 @@ export function ContactFooter() {
             </div>
           </div>
 
-          <div className="lg:col-span-4 lg:px-4">
+          <div className="lg:col-span-3 lg:px-4">
             <h4 className="text-white font-semibold text-lg mb-6">Horarios</h4>
             <ul className="text-gray-400 text-sm flex flex-col gap-2 max-w-[220px]">
               <li className="flex justify-between"><span>Lunes</span> <span>09:00 - 20:00</span></li>
