@@ -24,7 +24,14 @@ export function ContactFooter() {
                 Argentina
               </p>
             </div>
-            <div className="w-full max-w-[280px] h-40 rounded-xl overflow-hidden border border-white/10 relative group bg-white/5">
+            <a 
+              href="https://maps.app.goo.gl/c41qpZusxVLgF4ot7" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full max-w-[280px] h-40 rounded-xl overflow-hidden border border-white/10 relative group bg-white/5 cursor-pointer"
+            >
+              {/* Capa superpuesta para asegurar que el click se registre en el enlace en lugar del iframe */}
+              <div className="absolute inset-0 z-10"></div>
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.6020524458315!2d-58.50612!3d-34.8463386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd72e12330a13%3A0x6b47c61fcf1150bd!2sSB%20Beauty%20Studio!5e0!3m2!1ses-419!2sar!4v1714502553093!5m2!1ses-419!2sar" 
                 width="100%" 
@@ -33,9 +40,9 @@ export function ContactFooter() {
                 allowFullScreen 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                className="filter grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
+                className="filter grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 pointer-events-none"
               ></iframe>
-            </div>
+            </a>
           </div>
 
           <div className="lg:px-4">
