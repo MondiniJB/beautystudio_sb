@@ -32,17 +32,17 @@ export function HeroSection() {
     };
 
     const addListeners = () => {
-      document.addEventListener('touchend', handleGlobalInteraction, { passive: true });
-      document.addEventListener('click', handleGlobalInteraction, { passive: true });
-      document.addEventListener('scroll', handleGlobalInteraction, { passive: true });
-      document.addEventListener('touchstart', handleGlobalInteraction, { passive: true });
+      window.addEventListener('touchend', handleGlobalInteraction, { capture: true });
+      window.addEventListener('click', handleGlobalInteraction, { capture: true });
+      window.addEventListener('touchstart', handleGlobalInteraction, { capture: true, passive: true });
+      window.addEventListener('scroll', handleGlobalInteraction, { capture: true, passive: true });
     };
 
     const removeListeners = () => {
-      document.removeEventListener('touchend', handleGlobalInteraction);
-      document.removeEventListener('click', handleGlobalInteraction);
-      document.removeEventListener('scroll', handleGlobalInteraction);
-      document.removeEventListener('touchstart', handleGlobalInteraction);
+      window.removeEventListener('touchend', handleGlobalInteraction, { capture: true });
+      window.removeEventListener('click', handleGlobalInteraction, { capture: true });
+      window.removeEventListener('touchstart', handleGlobalInteraction, { capture: true });
+      window.removeEventListener('scroll', handleGlobalInteraction, { capture: true });
     };
 
     addListeners();
@@ -106,11 +106,7 @@ export function HeroSection() {
         </Reveal>
         
         <Reveal delay={100}>
-          <h1 
-            className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight ${needsInteraction ? 'cursor-pointer' : ''}`}
-            onClick={handleInteraction}
-            onTouchEnd={handleInteraction}
-          >
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
             Resaltá tu belleza <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-gold via-[#f3e5ab] to-primary-gold">
               natural
@@ -119,11 +115,7 @@ export function HeroSection() {
         </Reveal>
         
         <Reveal delay={200}>
-          <p 
-            className={`mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10 ${needsInteraction ? 'cursor-pointer' : ''}`}
-            onClick={handleInteraction}
-            onTouchEnd={handleInteraction}
-          >
+          <p className="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10">
             SB Solange Bianconi | Especialista en Cejas & PMU
           </p>
         </Reveal>
