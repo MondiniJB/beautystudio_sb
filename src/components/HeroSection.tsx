@@ -1,14 +1,63 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
+import { useEffect, useRef } from 'react';
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    let played = false;
+    
+    const tryPlayVideo = () => {
+      if (played) return;
+      if (videoRef.current && videoRef.current.paused) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            played = true;
+            removeListeners();
+          }).catch((error) => {
+            // Autoplay prevented, wait for next interaction
+            console.log('Esperando interacción del usuario para reproducir:', error);
+          });
+        }
+      }
+    };
+
+    const handleInteraction = () => {
+      tryPlayVideo();
+    };
+
+    const addListeners = () => {
+      document.addEventListener('touchstart', handleInteraction, { passive: true });
+      document.addEventListener('touchmove', handleInteraction, { passive: true });
+      document.addEventListener('scroll', handleInteraction, { passive: true });
+      document.addEventListener('click', handleInteraction, { passive: true });
+    };
+
+    const removeListeners = () => {
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('touchmove', handleInteraction);
+      document.removeEventListener('scroll', handleInteraction);
+      document.removeEventListener('click', handleInteraction);
+    };
+
+    addListeners();
+    // Try to play immediately (works if not in low power mode)
+    tryPlayVideo();
+
+    return () => {
+      removeListeners();
+    };
+  }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0">
         <video 
+          ref={videoRef}
           autoPlay 
           loop 
           muted 
