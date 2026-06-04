@@ -5,6 +5,8 @@ import videoWebpFallback from '../assets/videohero.webp';
 import { useEffect, useRef, useState } from 'react';
 
 export function HeroSection() {
+  // --- CÓDIGO MP4 GUARDADO POR SI ACASO ---
+  /*
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -22,19 +24,21 @@ export function HeroSection() {
       }
     }
   }, []);
+  */
+  // ----------------------------------------
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0 bg-dark-bg">
-        {/* WebP Fallback (visible if video is blocked) */}
+        {/* Usamos ÚNICAMENTE el WebP Animado como pidió el usuario */}
         <img 
           src={videoWebpFallback} 
           alt="Fondo de Beauty Studio"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
+          className="absolute inset-0 w-full h-full object-cover"
         />
         
-        {/* High Quality Video (visible if playing successfully) */}
+        {/* --- CÓDIGO MP4 GUARDADO POR SI ACASO ---
         <video 
           ref={videoRef}
           autoPlay 
@@ -47,6 +51,8 @@ export function HeroSection() {
         >
           <source src={videoHero} type="video/mp4" />
         </video>
+        ---------------------------------------- */}
+        
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
       </div>
