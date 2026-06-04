@@ -5,16 +5,16 @@ export function ContactFooter() {
   return (
     <footer id="contact" className="bg-black pt-16 pb-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 mb-12">
           
-          <div className="lg:col-span-2 flex flex-col items-start">
+          <div className="flex flex-col items-start">
             <img src={logo} alt="Beauty Studio SB" className="h-16 w-auto object-contain mb-4" />
             <p className="text-gray-400 text-sm max-w-xs">
               Resalta tu belleza natural con la mejor tecnología y profesionalismo.
             </p>
           </div>
           
-          <div className="lg:col-span-4">
+          <div>
             <h4 className="text-white font-semibold text-lg mb-6">Ubicación</h4>
             <div className="flex items-start gap-3 text-gray-400 mb-6 text-sm">
               <MapPin className="text-primary-gold shrink-0 mt-1" size={20} />
@@ -38,7 +38,7 @@ export function ContactFooter() {
             </div>
           </div>
 
-          <div className="lg:col-span-3 lg:px-4">
+          <div className="lg:px-4">
             <h4 className="text-white font-semibold text-lg mb-6">Horarios</h4>
             <ul className="text-gray-400 text-sm flex flex-col gap-2 max-w-[220px]">
               <li className="flex justify-between"><span>Lunes</span> <span>09:00 - 20:00</span></li>
@@ -51,7 +51,7 @@ export function ContactFooter() {
             </ul>
           </div>
           
-          <div className="lg:col-span-3">
+          <div>
             <h4 className="text-white font-semibold text-lg mb-6">Contacto & Redes</h4>
             
             <div className="flex flex-col gap-4 text-sm mb-6">
