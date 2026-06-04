@@ -5,10 +5,14 @@ export function PromoPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Retrasar la aparición del popup exactamente 2 segundos como solicitó el usuario
+    // Detectar si es celular (pantalla menor a 768px)
+    const isMobile = window.innerWidth < 768;
+    // En celular queremos que salte a los 2s para asegurar el toque para el video. En PC a los 10s.
+    const delay = isMobile ? 2000 : 10000;
+
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 2000);
+    }, delay);
 
     return () => clearTimeout(timer);
   }, []);
