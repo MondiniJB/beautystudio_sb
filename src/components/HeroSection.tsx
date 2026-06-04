@@ -104,8 +104,11 @@ export function HeroSection() {
         </Reveal>
         
         <Reveal delay={200}>
-          <p className="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10">
-            SB Solange Bianconi | Especialista en Cejas & PMU
+          <p className="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
+            Solange Bianconi | Beauty Studio <br />
+            <span className="text-lg md:text-xl text-primary-gold/90 font-medium">
+              Especialistas en Cejas, PMU y más
+            </span>
           </p>
         </Reveal>
 
