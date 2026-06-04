@@ -1,49 +1,48 @@
 import { ArrowRight } from 'lucide-react';
 import { Reveal } from './Reveal';
 import videoHero from '../assets/videohero.mp4';
-import videoWebpFallback from '../assets/videohero.webp';
 import { useEffect, useRef, useState } from 'react';
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [needsInteraction, setNeedsInteraction] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          setIsPlaying(true);
+          setNeedsInteraction(false);
         }).catch((error) => {
-          // Autoplay prevented (e.g. iOS low power mode)
-          console.log('Autoplay prevented, using WebP fallback:', error);
-          setIsPlaying(false);
+          // Autoplay blocked (Low Power Mode)
+          console.log('Autoplay blocked, showing invisible interaction layer:', error);
+          setNeedsInteraction(true);
         });
       }
     }
   }, []);
 
+  const handleInteraction = () => {
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setNeedsInteraction(false);
+      }).catch(err => {
+        console.log('Aún bloqueado:', err);
+      });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0 bg-dark-bg">
-        {/* WebP Fallback (visible if video is blocked) */}
-        <img 
-          src={videoWebpFallback} 
-          alt="Fondo de Beauty Studio"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
-        />
-        
-        {/* High Quality Video (visible if playing successfully) */}
         <video 
           ref={videoRef}
           autoPlay 
           loop 
           muted 
           playsInline 
-          onPlaying={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={videoHero} type="video/mp4" />
         </video>
@@ -51,6 +50,18 @@ export function HeroSection() {
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-[2px] z-10" />
       </div>
+
+      {/* Invisible layer to capture first interaction on mobile */}
+      {needsInteraction && (
+        <div 
+          className="absolute inset-0 z-[100] md:hidden cursor-pointer"
+          onClick={handleInteraction}
+          onTouchStart={handleInteraction}
+          onTouchEnd={handleInteraction}
+          onTouchMove={handleInteraction}
+          aria-hidden="true"
+        />
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
