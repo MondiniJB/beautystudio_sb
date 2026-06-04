@@ -51,7 +51,11 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section 
+      id="home" 
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden cursor-pointer md:cursor-default"
+      onClick={() => {}}
+    >
       {/* Background Video with overlay */}
       <div className="absolute inset-0 z-0 bg-dark-bg">
         <video 
